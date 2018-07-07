@@ -1,5 +1,6 @@
 class MemberController < ApplicationController
   def index
+    redirect_to visitor_path if !user_signed_in?
   end
 
   def addTask

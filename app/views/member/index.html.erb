@@ -1,2 +1,39 @@
-<h1>Member#index</h1>
-<p>Find me in app/views/member/index.html.erb</p>
+<%= generate_header('Tasks') %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Status</th>
+      <th scope="col">Title</th>
+      <th scope="col">Assigned To</th>
+      <th scope="col">Created By</th>
+      <th scope="col">Last Update</th>
+      <th scope="col">Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-success">
+      <th scope="row">Completed</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-info">
+      <th scope="row">Processing</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-warning">
+      <th scope="row">Queued</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+  </tbody>
+</table>
