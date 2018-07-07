@@ -1,0 +1,45 @@
+<% current_path = [controller.controller_name, controller.action_name].join('#') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <% if user_signed_in? %>
+    <%= link_to 'Tasker', roster_path, class: 'navbar-brand' %>
+  <% else %>
+    <%= link_to 'Tasker', visitor_path, class: 'navbar-brand' %>
+  <% end %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <% if user_signed_in? %>
+
+        <li class="nav-item <%= 'active' if current_path.eql?('member#addTask') %>">
+          <%= current_path.eql?('member#addTask') ? link_to(raw('Add Task To Queue<span class="sr-only">(current)</span>'), add_task_path, class: 'nav-link') : link_to('Add Task To Queue', add_task_path, class: 'nav-link') %>
+        </li>
+
+        <% if user_is_tech? %>
+          <li class="nav-item <%= 'active' if current_path.eql?('member#assignTask') %>">
+            <%= current_path.eql?('member#assignTask') ? link_to(raw('Next Task <span class="sr-only">(current)</span>'), assign_task_path, class: 'nav-link') : link_to('Next Task', assign_task_path, class: 'nav-link') %>
+          </li>
+        <% end %>
+
+        <li class="nav-item">
+          <%= link_to("Sign Out", destroy_user_session_path, method: :delete, class: 'nav-link') %>
+        </li>
+      <% else %>
+        <li class="nav-item <%= 'active' if current_path.eql?('registrations#new') %>">
+          <%= current_path.eql?('registrations#new') ? link_to(raw('Join <span class="sr-only">(current)</span>'), new_user_registration_path, class: 'nav-link') : link_to('Join', new_user_registration_path, class: 'nav-link') %>
+        </li>
+        <li class="nav-item <%= 'active' if current_path.eql?('sessions#new') %>">
+          <%= current_path.eql?('sessions#new') ? link_to(raw('Sign In <span class="sr-only">(current)</span>'), new_user_session_path, class: 'nav-link') : link_to('Sign In', new_user_session_path, class: 'nav-link') %>
+        </li>
+      <% end %>
+    </ul>
+    <% if user_signed_in? %>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" placeholder="Search" type="text">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <% end %>
+  </div>
+</nav>

@@ -1,3 +1,9 @@
 @import 'minty/variables';
 @import 'bootstrap';
 @import 'minty/bootswatch';
+
+/* Show it is fixed to the top */
+body {
+  min-height: 50rem;
+  padding-top: 4.5rem;
+}
