@@ -2,7 +2,7 @@ module ApplicationHelper
 
   # Devise helper to allow us to have members with the tech flag
   def user_is_tech?
-    true
+    current_user.tech
   end
 
   # HTML header generator helper for DRY
