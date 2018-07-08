@@ -10,33 +10,12 @@
       <th scope="col">Age</th>
     </tr>
   </thead>
-  <tbody>
-    <tr class="table-success">
-      <th scope="row">Completed</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-info">
-      <th scope="row">Processing</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-warning">
-      <th scope="row">Queued</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
+  <tbody id='task-list'>
   </tbody>
 </table>
 
 <%= render 'modals/add_task_to_queue' %>
-<%= render 'modals/next_task' %>
+<%= render 'modals/task_details' %>
+<% if user_is_tech? %>
+  <%= render 'modals/next_task' %>
+<% end %>

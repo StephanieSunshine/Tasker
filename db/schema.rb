@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 2018_07_08_032452) do
 
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id"
-    t.string "title"
-    t.text "body"
-    t.integer "state"
+    t.string "title", null: false
+    t.text "body", null: false
+    t.integer "state", default: 0, null: false
     t.integer "assigned_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

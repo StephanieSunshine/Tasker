@@ -1,28 +1,24 @@
 Rails.application.routes.draw do
 
   devise_for :users
+
   # Home Pages
-  get '/', to: 'visitor#index', as: 'visitor'
-  get '/roster', to: 'member#index', as: 'roster'
-  get '/task/:id', to: 'task#index'
+  get '/',                    to: 'visitor#index',            as: 'visitor'
+  get '/roster',              to: 'member#index',             as: 'roster'
+  get '/task/:id',            to: 'task#index'
 
-  # Add Task to Roster
-  get '/roster/addTask',  to: 'member#addTask', as: 'add_task'
-  post '/roster/addTask', to: 'member#addTask'
+  # Lookups
+  get '/roster/feed',         to: 'member#rosterFeed'
+  get '/task/:id/details',    to: 'member#getTaskDetails',    as: 'task_details'
 
-  # Change Task on Roster
-  get '/roster/:id/changeTask', to: 'member#changeTask', as: 'change_task'
-  post '/roster/:id/changeTask', to: 'member#changeTask'
+  get '/roster/next',         to: 'member#getNextTask',       as: 'next_task'
+  get '/users/userID',        to: 'member#getCurrentUserId',  as: 'get_current_user_id'
 
-  # Assign Task to Tech
-  get '/roster/assignTask', to: 'member#assignTask', as: 'assign_task'
-
-  # Task Dialog
-  post '/task/:id/addToTask', to: 'task#addToTask', as: 'update_task'
-
-  # End Task
-  post '/task/:id/closeTask', to: 'task#closeTask', as: 'close_task'
-
+  # Callbacks
+  post '/roster/addTask',     to: 'member#addTask',           as: 'add_task'
+  post '/roster/updateTask',  to: 'member#updateTask',        as: 'update_task'
+  get '/task/:id/closeTask',  to: 'member#closeTask',           as: 'close_task'
+  get '/task/:id/acceptTask', to: 'member#acceptTask',        as: 'accept_task'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

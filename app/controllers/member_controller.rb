@@ -1,15 +1,65 @@
 class MemberController < ApplicationController
-  
+  include ActionView::Helpers::DateHelper
+  before_action :authenticate_user!
+
   def index
-    redirect_to visitor_path if !user_signed_in?
+    @task = Task.new
   end
 
   def addTask
+    params.require(:task).permit(:title, :body)
+    #raise params.inspect
+    current_user.tasks.create({title: params[:task][:title], body: params[:task][:body]})
+    redirect_to roster_url
   end
 
-  def changeTask
+  def updateTask
+    params.require(:task).permit(:id, :title, :body)
+    task = Task.find(params[:task][:id])
+    task.update({title: params[:task][:title], body: params[:task][:body]}) if current_user.id == task.user_id
+    redirect_to roster_url
   end
 
-  def assignTask
+  def getTaskDetails
+    params.require(:id)
+    render json: Task.find(params[:id])
+  end
+
+  def getCurrentUserId
+    render json: current_user.id
+  end
+
+  def getNextTask
+    render json: Task.where(state: :queued).order(:created_at).limit(1) if current_user.tech.eql?(true)
+  end
+
+  def acceptTask
+    logger.info params
+  end
+
+  def closeTask
+  end
+
+  def rosterFeed
+    results = []
+
+    Task.where(state: :completed).order(:created_at).limit(5).to_a.each {|e| results.push(e) }
+    Task.where(state: :active).order(:created_at).to_a.each {|e| results.push(e) }
+    Task.where(state: :queued).order(:created_at).to_a.each {|e| results.push(e) }
+
+    results.map! do |e|
+      logger.info e
+      result={}
+      result[:id]=e.id
+      result[:created_by]=User.find(e.user_id).email
+      result[:title]=e.title
+      result[:state]=e.state
+      result[:assigned_to] = e.assigned_to.nil? ? "None" : User.find(e.assigned_to).email
+      result[:last_update]=distance_of_time_in_words(Time.now, e.updated_at)
+      result[:age]=distance_of_time_in_words(Time.now, e.created_at)
+      result
+    end
+
+    render json: results
   end
 end
