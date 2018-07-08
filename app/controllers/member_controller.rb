@@ -34,7 +34,10 @@ class MemberController < ApplicationController
   end
 
   def acceptTask
-    logger.info params
+    params.require(:id)
+    task = Task.find(params[:id])
+    task.update({assigned_to: current_user.id, state: :active}) if(current_user.tech && task.state.eql?("queued"))
+    redirect_to '/task/'+params[:id]
   end
 
   def closeTask
@@ -48,7 +51,6 @@ class MemberController < ApplicationController
     Task.where(state: :queued).order(:created_at).to_a.each {|e| results.push(e) }
 
     results.map! do |e|
-      logger.info e
       result={}
       result[:id]=e.id
       result[:created_by]=User.find(e.user_id).email

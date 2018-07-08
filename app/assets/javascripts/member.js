@@ -6,11 +6,7 @@ function openDialog(id) {
 }
 
 function acceptTask(id) {
-  $.ajax({
-    url: '/task/'+id+'/accept'
-  }).done(
-    openDialog(id)
-  );
+  window.location.replace('/task/'+id+'/accept');
 }
 
 function loadCurrentUserID() {
@@ -25,7 +21,8 @@ function editDetails(task) {
   $.ajax({
     url: '/task/'+task.dataset.id+'/details'
   }).done(function(data) {
-    if(data.user_id!=current_user_id) {
+    console.log(data);
+    if(data.user_id!=current_user_id||data.state!="queued") {
       $('#taskDetailsTitleField').prop('disabled', true);
       $('#taskDetailsBodyField').prop('disabled', true);
     }
@@ -48,7 +45,7 @@ function nextTask() {
     // $('#taskDetailsHiddenID').val(data.id);
     // $('#taskDetailsTitleField').val(data.title);
     // $('#taskDetailsBodyField').val(data.body);
-    $('#taskDetailsAcceptButton').attr('onclick', 'acceptTask('+data[0].id+'); openDialog('+data[0].id+')');
+    $('#nextTaskAcceptButton').attr('onclick', 'acceptTask('+data[0].id+')');
     $('#nextTaskModal').modal({ show: true});
   });
 }
