@@ -16,7 +16,6 @@ function acceptTask(id) {
 }
 
 function editDetails(task) {
-  document.cookie
 
   $.ajax({
     url: '/task/'+task.dataset.id+'/details'
@@ -43,7 +42,13 @@ function editDetails(task) {
     $('#taskDetailsHiddenID').val(data.id);
     $('#taskDetailsTitleField').val(data.title);
     $('#taskDetailsBodyField').val(data.body);
-    $('#taskDetailsJoinButton').attr('onclick', 'openDialog('+data.id+')')
+    if(data.state == 'queued') {
+      $('#taskDetailsAcceptButton').show();
+      $('#taskDetailsAcceptButton').attr('onclick', 'acceptTask('+data.id+')');
+    } else {
+      $('#taskDetailsAcceptButton').hide();
+    }
+    $('#taskDetailsJoinButton').attr('onclick', 'openDialog('+data.id+')');
     $('#taskDetailsModal').modal({ show: true});
   });
 }

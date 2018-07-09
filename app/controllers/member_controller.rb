@@ -21,7 +21,7 @@ class MemberController < ApplicationController
   def update
     params.require(:task).permit(:id, :title, :body)
     task = Task.find(params[:task][:id])
-    task.update({title: params[:task][:title], body: params[:task][:body]}) if current_user.id == task.user_id
+    task.update({title: params[:task][:title], body: params[:task][:body]}) if(task.user_id.eql?(current_user.id) || current_user.tech)
     redirect_to roster_url
   end
 

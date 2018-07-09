@@ -23,7 +23,7 @@
           </li>
         <% end %>
 
-        <% if user_is_tech? && controller_name.eql?('task') %>
+        <% if controller_name.eql?('task') %>
           <li class="nav-item <%= 'active' if current_path.eql?('task#dialog') %>">
             <%= current_path.eql?('task#dialog') ? link_to(raw('Dialog <span class="sr-only">(current)</span>'), '/task/'+params[:id]+'/dialog', class: 'nav-link') : link_to('Open Dialog', '/task/'+params[:id]+'/dialog', class: 'nav-link') %>
           </li>

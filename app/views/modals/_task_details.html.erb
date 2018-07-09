@@ -23,6 +23,9 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
           <%= f.submit "Update", class: 'btn btn-primary' %>
+          <% if @current_user.tech %>
+            <button type="button" class="btn btn-warning" data-dismiss="modal" id="taskDetailsAcceptButton">Accept</button>
+          <% end %>
           <button type="button" class="btn btn-info" data-dismiss="modal" id="taskDetailsJoinButton">Join</button>
         </div>
       <% end %>
