@@ -21,10 +21,6 @@ function editDetails(task) {
   $.ajax({
     url: '/task/'+task.dataset.id+'/details'
   }).done(function(data) {
-    console.log(data.user_id);
-    console.log(current_user_id);
-    console.log(current_user_tech);
-    console.log(data.state);
 
     // If the current user doesn't match, grey it out
     if(data.user_id != current_user_id) {
@@ -77,4 +73,4 @@ function loadFeeder() {
   });
 }
 
-loadFeeder();
+$(loadFeeder());

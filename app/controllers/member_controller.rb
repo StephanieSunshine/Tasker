@@ -4,7 +4,6 @@ class MemberController < ApplicationController
 
   def setUser
     cookies[:user_id]=current_user.id
-    cookies[:email]=current_user.email
     cookies[:is_tech]=current_user.tech
   end
 
@@ -35,8 +34,6 @@ class MemberController < ApplicationController
   def getNextTask
     render json: Task.where(state: :queued).order(:created_at).limit(1) if current_user.tech.eql?(true)
   end
-
-
 
   def closeTask
   end

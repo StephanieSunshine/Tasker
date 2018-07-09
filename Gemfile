@@ -39,8 +39,10 @@ gem 'devise'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-# Bootstrap
+# Auto link generator
+gem 'rinku'
 
+# Bootstrap
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'popper_js', '~> 1.12', '>= 1.12.9'
 gem 'bootstrap', '~> 4.0'

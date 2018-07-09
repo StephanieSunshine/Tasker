@@ -1,0 +1,19 @@
+<div class="container" id='dialogHistory'>
+  <% @messages.each do |m| %>
+    <div class="card mt-1 mb-1 <%= m['tech'] ? "border-secondary" : "border-primary" %>">
+      <div class="card-header <%= m['tech'] ? "bg-secondary" : "bg-primary" %>"><span class="text-dark"><%= m['user'] %> says: </span><span class="float-right"><%= m['created_at'] %></span></div>
+      <div class="card-body"><%= m['data'].html_safe %></div>
+    </div>
+  <% end %>
+</div>
+
+<footer class="footer bg-primary">
+  <div class="container">
+    <div class="form-group form-inline">
+      <label for="message-input">Message: </label>
+      <textarea class="form-control ml-2 mr-2" id="message-input" rows="1" style="width: 85%"></textarea>
+      <button class="btn btn-secondary ml-2" onClick="sendInput(<%= @id %>)">Send</button>
+    </div>
+  </div>
+</footer>
+<%= render 'modals/add_task_to_queue' %>
