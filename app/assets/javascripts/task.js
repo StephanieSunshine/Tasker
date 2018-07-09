@@ -1,16 +1,21 @@
 //= require nextTask
+//=require cable
 
-$(function() {
+// scroll dialog messages to the bottom on DOM Ready
+function scrollFix() {
   $(window).scrollTop($('body').prop('scrollHeight'));
-});
+}
 
+// send a message back to the server
 function sendInput(id) {
   Rails.ajax({
     url: '/task/'+id+'/dialog/message',
     type: 'POST',
     data: 'data='+$('#message-input').val(),
     success: function(data) {
-      window.location.replace('/task/'+id+'/dialog');
+      // window.location.replace('/task/'+id+'/dialog');
     }
   });
 }
+
+$(scrollFix());

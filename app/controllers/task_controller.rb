@@ -54,7 +54,12 @@ class TaskController < ApplicationController
     params.require(:id)
     params.require(:data)
     task = Task.find(params[:id])
-    task.messages.create({user: current_user.id, data: params[:data]}) if(task.user_id.eql?(current_user.id) || current_user.tech)
+    m = task.messages.create({user: current_user.id, data: params[:data]}) if(task.user_id.eql?(current_user.id) || current_user.tech)
     task.touch
-  end
+
+    data = "<div class=\"card mt-1 mb-1 #{current_user.tech ? "border-secondary" : "border-primary"}\">";
+    data += "<div class=\"card-header #{current_user.tech ? "bg-secondary" : "bg-primary"}\"><span class=\"text-dark\">#{current_user.email} says: </span><span class=\"float-right\">#{distance_of_time_in_words(Time.now, m.created_at)}</span></div>"
+    data += "<div class=\"card-body\">#{(m.data.split("\r\n").map {|e| "<p class='lead card-text pl-5 pr-5'>#{Rinku.auto_link e}</p>" }).join}</div>"
+    ActionCable.server.broadcast 'dialog_notifications_channel', task: params[:id], action: :dialog_update, data: data
+    end
 end
