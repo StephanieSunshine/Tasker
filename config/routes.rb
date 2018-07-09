@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/',                    to: 'visitor#index',            as: 'visitor'
   get '/roster',              to: 'member#index',             as: 'roster'
   get '/task/:id',            to: 'task#index',               as: 'task'
+  get '/task/:id/dialog',     to: 'task#dialog',              as: 'dialog'
 
   # Lookups
   get '/roster/feed',         to: 'member#rosterFeed'

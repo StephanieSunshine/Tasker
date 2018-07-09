@@ -19,7 +19,7 @@
 
         <% if user_is_tech? && controller_name.eql?('member') %>
           <li class="nav-item">
-            <%= link_to('Next Task', next_task_path, class: 'nav-link', 'data-toggle': 'modal', 'data-target': '#nextTaskModal') %>
+            <%= link_to('Next Task', '/roster/next', class: 'nav-link', onclick: 'nextTask(event)') %>
           </li>
         <% end %>
 

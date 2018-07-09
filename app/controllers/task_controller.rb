@@ -16,12 +16,14 @@ class TaskController < ApplicationController
     @response['body']  = (@response['body'].split("\r\n").map {|e| "<p class='lead'>#{e}</p>" }).join
   end
 
-
-
-  def addToTask
+  def dialog
   end
 
-  def closeTask
+  def complete
+    params.require(:id)
+    task = Task.find(params[:id])
+    task.update({state: :completed}) if(current_user.tech && task.state.eql?("active"))
+    redirect_to roster_url
   end
 
   def accept

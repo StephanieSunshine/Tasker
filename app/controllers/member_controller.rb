@@ -1,6 +1,12 @@
 class MemberController < ApplicationController
   include ActionView::Helpers::DateHelper
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :setUser
+
+  def setUser
+    cookies[:user_id]=current_user.id
+    cookies[:email]=current_user.email
+    cookies[:is_tech]=current_user.tech
+  end
 
   def index
     @task = Task.new
