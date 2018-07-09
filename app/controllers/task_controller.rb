@@ -22,9 +22,14 @@ class TaskController < ApplicationController
     @task = Task.new
     @messages = Task.find(params[:id]).messages.map do |m|
       response = m.attributes
-      u=User.find(m['user'])
-      response['tech']=u.tech;
-      response['user']=u.email;
+      if m['user'] > 0
+        u=User.find(m['user'])
+        response['tech']=u.tech;
+        response['user']=u.email;
+      else
+        response['tech']=true;
+        response['user']='Server'
+      end
       response['created_at']=distance_of_time_in_words(Time.now, m['created_at'])+' ago'
       response['data']  = (m['data'].split("\r\n").map {|e| "<p class='lead card-text pl-5 pr-5'>#{Rinku.auto_link e}</p>" }).join
       response
