@@ -13,13 +13,22 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
 
-        <li class="nav-item <%= 'active' if current_path.eql?('member#addTask') %>">
-          <%= current_path.eql?('member#addTask') ? link_to(raw('Add Task To Queue<span class="sr-only">(current)</span>'), add_task_path, class: 'nav-link', 'data-toggle': 'modal', 'data-target': '#addTaskToQueueModal') : link_to('Add Task To Queue', add_task_path, class: 'nav-link', 'data-toggle': 'modal', 'data-target': '#addTaskToQueueModal') %>
+        <li class="nav-item">
+          <%= link_to('Add Task', add_task_path, class: 'nav-link', 'data-toggle': 'modal', 'data-target': '#addTaskToQueueModal') %>
         </li>
 
-        <% if user_is_tech? %>
+        <% if user_is_tech? && controller_name.eql?('member') %>
+          <li class="nav-item">
+            <%= link_to('Next Task', next_task_path, class: 'nav-link', 'data-toggle': 'modal', 'data-target': '#nextTaskModal') %>
+          </li>
+        <% end %>
+
+        <% if user_is_tech? && controller_name.eql?('task') %>
           <li class="nav-item <%= 'active' if current_path.eql?('member#assignTask') %>">
-            <%= current_path.eql?('member#assignTask') ? link_to(raw('Next Task <span class="sr-only">(current)</span>'), next_task_path, class: 'nav-link', 'data-toggle': 'modal', 'data-target': '#nextTaskModal') : link_to('Next Task', next_task_path, class: 'nav-link', 'data-toggle': 'modal', 'data-target': '#nextTaskModal') %>
+            <%= current_path.eql?('task#dialog') ? link_to(raw('Dialog <span class="sr-only">(current)</span>'), '/task/'+params[:id]+'/dialog', class: 'nav-link') : link_to('Open Dialog', '/task/'+params[:id]+'/dialog', class: 'nav-link') %>
+          </li>
+          <li class="nav-item">
+            <%= link_to('Complete Task', '/task/'+params[:id]+'/complete', class: 'nav-link') %>
           </li>
         <% end %>
 

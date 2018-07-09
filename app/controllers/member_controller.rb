@@ -6,24 +6,21 @@ class MemberController < ApplicationController
     @task = Task.new
   end
 
-  def addTask
+  def add
     params.require(:task).permit(:title, :body)
     #raise params.inspect
     current_user.tasks.create({title: params[:task][:title], body: params[:task][:body]})
     redirect_to roster_url
   end
 
-  def updateTask
+  def update
     params.require(:task).permit(:id, :title, :body)
     task = Task.find(params[:task][:id])
     task.update({title: params[:task][:title], body: params[:task][:body]}) if current_user.id == task.user_id
     redirect_to roster_url
   end
 
-  def getTaskDetails
-    params.require(:id)
-    render json: Task.find(params[:id])
-  end
+
 
   def getCurrentUserId
     render json: current_user.id
@@ -33,12 +30,7 @@ class MemberController < ApplicationController
     render json: Task.where(state: :queued).order(:created_at).limit(1) if current_user.tech.eql?(true)
   end
 
-  def acceptTask
-    params.require(:id)
-    task = Task.find(params[:id])
-    task.update({assigned_to: current_user.id, state: :active}) if(current_user.tech && task.state.eql?("queued"))
-    redirect_to '/task/'+params[:id]
-  end
+
 
   def closeTask
   end

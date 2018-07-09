@@ -9,18 +9,17 @@ Rails.application.routes.draw do
 
   # Lookups
   get '/roster/feed',         to: 'member#rosterFeed'
-  get '/task/:id/details',    to: 'member#getTaskDetails',    as: 'task_details'
-
   get '/roster/next',         to: 'member#getNextTask',       as: 'next_task'
   get '/users/userID',        to: 'member#getCurrentUserId',  as: 'get_current_user_id'
 
-  # Callbacks
-  # these two should be fixed
-  post '/roster/addTask',     to: 'member#addTask',           as: 'add_task'
-  post '/roster/update',      to: 'member#updateTask',        as: 'update_task'
+  get '/task/:id/details',    to: 'task#details',             as: 'task_details'
 
-  get '/task/:id/close',      to: 'member#closeTask',         as: 'close_task'
-  get '/task/:id/accept',     to: 'member#acceptTask',        as: 'accept_task'
+  # Callbacks
+  post '/roster/add',         to: 'member#add',               as: 'add_task'
+  post '/roster/update',      to: 'member#update',            as: 'update_task'
+
+  get '/task/:id/complete',   to: 'task#complete',            as: 'close_task'
+  get '/task/:id/accept',     to: 'task#accept',              as: 'accept_task'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

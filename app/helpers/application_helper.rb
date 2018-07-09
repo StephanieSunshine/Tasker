@@ -7,7 +7,7 @@ module ApplicationHelper
 
   # HTML header generator helper for DRY
   def generate_header(title = "", body = "")
-    data = "<div class='px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center'><h1 class='display-4'>#{title}</h1><p class='lead'>#{body}</p></div>"
+    data = "<div class='px-3 py-3 pt-md-5 pb-md-4 mx-auto'><h1 class='display-4 text-center'>#{title}</h1><p class='lead'>#{body}</p></div>"
     data.html_safe
   end
 

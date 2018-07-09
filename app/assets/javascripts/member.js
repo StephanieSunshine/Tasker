@@ -21,7 +21,6 @@ function editDetails(task) {
   $.ajax({
     url: '/task/'+task.dataset.id+'/details'
   }).done(function(data) {
-    console.log(data);
     if(data.user_id!=current_user_id||data.state!="queued") {
       $('#taskDetailsTitleField').prop('disabled', true);
       $('#taskDetailsBodyField').prop('disabled', true);

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Tasker</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, shrink-to-fit=no">
+
+    <%= stylesheet_link_tag     'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag  'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag  params[:controller], 'data-turbolinks-track': 'reload' if params[:controller].eql?('task') || params[:controller].eql?('member') %>
   </head>
   <body>
     <% if !notice.nil? then %>

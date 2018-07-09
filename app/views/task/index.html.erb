@@ -1,2 +1,26 @@
-<h1>Task#index</h1>
-<p>Find me in app/views/task/index.html.erb</p>
+<div class="container">
+  <div class="h1 display-4 text-center mx-auto"><%= @response['title'] %></div>
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">State</th>
+        <th scope="col">Created</th>
+        <th scope="col">Updated</th>
+        <th scope="col">From</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="<%= @response['state_color'] %>"><%= @response['state'].slice(0,1).capitalize + @response['state'].slice(1..-1) %></td>
+        <td class="<%= @response['age_color'] %>"><%= @response['age'] %></td>
+        <td class="<%= @response['last_update_color'] %>"><%= @response['last_update'] %></td>
+        <td class="table-info"><%= @response['created_by'] %></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= generate_header("Details", @response['body']) %>
+</div>
+<%= render 'modals/add_task_to_queue' %>
+<% if user_is_tech? %>
+  <%= render 'modals/next_task' %>
+<% end %>
