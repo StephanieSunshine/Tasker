@@ -1,13 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: 
-  messages: 
+  user: 1
+  title: test
+  body: test2
   state: 1
-  assigned_to: 1
-
-two:
-  user: 
-  messages: 
-  state: 1
-  assigned_to: 1
+  assigned_to: 2
