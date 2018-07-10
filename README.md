@@ -1,18 +1,18 @@
 # Tasker
-###Requirements
+## Requirements
 - Ruby
 - Postgresql
 - Redis
 
-###Recomendations
+## Recomendations
 
-####Postgresql
+### Postgresql
 Postgres needs a DATABASE_URL envrionmental variable set when doing development.  Don't forget to create the database before starting the application.
 
-####Redis
+### Redis
 Redis needs either a REDIS_URL environmental variable or a Redis server running on localhost with the default port.
 
-###Quickstart
+## Quickstart
 ```bash
 git clone git@github.com:StephanieSunshine/Tasker.git && cd Tasker
 bin/bundle install --path vendor/bundle
@@ -20,13 +20,13 @@ DATABASE_URL="postgres://postgres:postgres@localhost/tasker" bin/rails db:migrat
 DATABASE_URL="postgres://postgres:postgres@localhost/tasker" bin/rails s
 ```
 
-###Production
+## Production
 If one were to use this in production I would suggest using Heroku as your provider
 
-###Example
+## Example
 Demo Tasker at: https://sunshine-tasker-demo.herokuapp.com/
 
-###License
+## License
 MIT License
 
 Copyright (c) 2018 Stephanie Sunshine
