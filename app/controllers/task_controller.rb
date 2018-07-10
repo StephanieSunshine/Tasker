@@ -11,9 +11,16 @@ class TaskController < ApplicationController
     @response['created_by']=User.find(@response['user_id']).email
     @response['last_update']=distance_of_time_in_words(Time.now, @response['updated_at'])+' ago'
     @response['age']=distance_of_time_in_words(Time.now, @response['created_at'])+' ago'
-    @response['state_color'] = "table-warning"
+    case @response['state']
+    when :queued
+      @response['state_color'] = "table-warning"
+    when :active
+      @response['state_color'] = "table-info"
+    when :completed
+      @response['state_color'] = "table-success"
+    end
     @response['age_color'] = "table-success"
-    @response['last_update_color'] = "table-danger"
+    @response['last_update_color'] = "table-success"
     @response['body']  = (@response['body'].split("\r\n").map {|e| "<p class='lead'>#{Rinku.auto_link e}</p>" }).join
   end
 
