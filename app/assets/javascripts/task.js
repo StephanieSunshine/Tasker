@@ -14,7 +14,7 @@ function sendInput(id) {
     type: 'POST',
     data: 'data='+$('#message-input').val(),
     success: function(data) {
-      // window.location.replace('/task/'+id+'/dialog');
+      $('#message-input').val('');
     }
   });
 }
