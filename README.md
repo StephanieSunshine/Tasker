@@ -1,5 +1,7 @@
 # Tasker
 
+A simple open minded task manager.  Anyone may sign up, anyone that signs up may be promoted to being a tech.  A tech has the ability to accept a queued task, edit a task, initiate dialog with the user, and complete a task.  To promote a user to a tech, enter your rails console and type ```User.find_by({email: ''}).update({tech: true})```.
+
 ## Example
 Demo Tasker at: https://sunshine-tasker-demo.herokuapp.com/
 
