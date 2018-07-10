@@ -25,7 +25,7 @@ Postgres needs a DATABASE_URL envrionmental variable set when doing development.
 Redis needs either a REDIS_URL environmental variable or a Redis server running on localhost with the default port.
 
 ### Production
-If one were to use this in production I would suggest using Heroku as your provider.  Make sure you set DEVISE_SECRET_KEY in production to something persistent
+If one were to use this in production I would suggest using Heroku as your provider.  Make sure you set DEVISE_SECRET_KEY in production to something persistent.
 
 ## License
 MIT License
