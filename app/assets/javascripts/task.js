@@ -19,4 +19,5 @@ function sendInput(id) {
   });
 }
 
+// scroll on DOM ready
 $(scrollFix());

@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   # Lookups
   get   '/roster/feed',             to: 'member#rosterFeed'
   get   '/roster/next',             to: 'member#getNextTask',       as: 'next_task'
-  get   '/users/userID',            to: 'member#getCurrentUserId',  as: 'get_current_user_id'
 
   get   '/task/:id/details',        to: 'task#details',             as: 'task_details'
 

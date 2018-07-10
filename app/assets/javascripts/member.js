@@ -4,26 +4,25 @@
 
 // Load json list via ajax from the server to task details
 var cookies = new Object;
-
 document.cookie.split('; ').map(function(e){ var p = e.split('='); cookies[p[0]] = p[1]; });
 var current_user_id = cookies.user_id
 var current_user_tech = cookies.is_tech;
 
-
+// switch to task summary page
 function openDialog(id) {
   window.location.replace('/task/'+id);
 }
 
+// accept task
 function acceptTask(id) {
   window.location.replace('/task/'+id+'/accept');
 }
 
+// load and populate edit details modal
 function editDetails(task) {
-
   $.ajax({
     url: '/task/'+task.dataset.id+'/details'
   }).done(function(data) {
-
     // If the current user doesn't match, grey it out
     if(data.user_id != current_user_id) {
       $('#taskDetailsTitleField').prop('disabled', true);
@@ -56,13 +55,12 @@ function editDetails(task) {
   });
 }
 
-// Load json list via ajax from the server to populate tasks
+// load json list via ajax from the server to populate tasks
 function loadFeeder() {
-  console.log('loadFeeder triggered');
   $.ajax({
     url: '/roster/feed'
   }).done(function(d) {
-    var r = d.map(function(data) {
+    $('#task-list').html(d.map(function(data) {
       var result = [];
       if(data.state=="completed") {
         result.push("<tr class='table-success' onClick=\"editDetails(this)\" data-id=\""+data.id+"\">");
@@ -78,9 +76,9 @@ function loadFeeder() {
       result.push("<td>"+data.last_update+"</td>");
       result.push("<td>"+data.age+"</td>");
       return(result.join());
-    }).join("\n");
-    $('#task-list').html(r);
+    }).join("\n"));
   });
 }
 
+// first time load the roster ( websockets after that )
 $(loadFeeder());

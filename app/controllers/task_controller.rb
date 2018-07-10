@@ -2,6 +2,7 @@ class TaskController < ApplicationController
   include ActionView::Helpers::DateHelper
   before_action :authenticate_user!
 
+  # task summary
   def index
     params.require(:id)
     @task = Task.new
@@ -16,6 +17,7 @@ class TaskController < ApplicationController
     @response['body']  = (@response['body'].split("\r\n").map {|e| "<p class='lead'>#{Rinku.auto_link e}</p>" }).join
   end
 
+  # task chat dialog
   def dialog
     params.require(:id)
     @id = params[:id];
@@ -36,6 +38,7 @@ class TaskController < ApplicationController
     end
   end
 
+  # call to complete a task
   def complete
     params.require(:id)
     task = Task.find(params[:id])
@@ -44,6 +47,7 @@ class TaskController < ApplicationController
     redirect_to roster_url
   end
 
+  # call to accept a task and redirect to the task summary page
   def accept
     params.require(:id)
     task = Task.find(params[:id])
@@ -52,11 +56,13 @@ class TaskController < ApplicationController
     redirect_to '/task/'+params[:id]
   end
 
+  # task details REST endpoint
   def details
     params.require(:id)
     render json: Task.find(params[:id])
   end
 
+  # task receive chat message and trigger websocket refresh callback
   def message
     params.require(:id)
     params.require(:data)

@@ -1,3 +1,4 @@
+// present next task to accept
 function nextTask(e) {
   e.preventDefault();
   $.ajax({

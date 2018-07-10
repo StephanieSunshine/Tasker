@@ -1,16 +1,20 @@
 class MemberController < ApplicationController
   include ActionView::Helpers::DateHelper
+  # devise is used for auth
   before_action :authenticate_user!, :setUser
 
+  # needed to pass id and tech easily to javascript
   def setUser
     cookies[:user_id]=current_user.id
     cookies[:is_tech]=current_user.tech
   end
 
+  # form_for uses this for validations
   def index
     @task = Task.new
   end
 
+  # add a new task
   def add
     params.require(:task).permit(:title, :body)
     #raise params.inspect
@@ -19,6 +23,7 @@ class MemberController < ApplicationController
     redirect_to roster_url
   end
 
+  # update a current
   def update
     params.require(:task).permit(:id, :title, :body)
     task = Task.find(params[:task][:id])
@@ -27,14 +32,12 @@ class MemberController < ApplicationController
     redirect_to roster_url
   end
 
-  def getCurrentUserId
-    render json: current_user.id
-  end
-
+  # send next task to accept
   def getNextTask
     render json: Task.where(state: :queued).order(:created_at).limit(1) if current_user.tech.eql?(true)
   end
 
+  # ajax roster feed
   def rosterFeed
     results = []
 

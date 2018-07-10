@@ -18,7 +18,8 @@
       </tr>
     </tbody>
   </table>
-  <%= generate_header("Details", @response['body']) %>
+  <div class="h1 display-4 text-center mx-auto">Details</div>
+  <%= @response['body'].html_safe %>
 </div>
 <%= render 'modals/add_task_to_queue' %>
 <% if user_is_tech? %>
