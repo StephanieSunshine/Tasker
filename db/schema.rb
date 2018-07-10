@@ -12,8 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2018_07_08_032452) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "messages", force: :cascade do |t|
-    t.integer "task_id"
+    t.bigint "task_id"
     t.integer "user"
     t.text "data"
     t.datetime "created_at", null: false
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_07_08_032452) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "title", null: false
     t.text "body", null: false
     t.integer "state", default: 0, null: false
@@ -50,4 +53,5 @@ ActiveRecord::Schema.define(version: 2018_07_08_032452) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "messages", "tasks"
 end
