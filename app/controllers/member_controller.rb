@@ -15,6 +15,7 @@ class MemberController < ApplicationController
     params.require(:task).permit(:title, :body)
     #raise params.inspect
     current_user.tasks.create({title: params[:task][:title], body: params[:task][:body]})
+    ActionCable.server.broadcast 'roster_notifications_channel', update: true
     redirect_to roster_url
   end
 
@@ -22,10 +23,9 @@ class MemberController < ApplicationController
     params.require(:task).permit(:id, :title, :body)
     task = Task.find(params[:task][:id])
     task.update({title: params[:task][:title], body: params[:task][:body]}) if(task.user_id.eql?(current_user.id) || current_user.tech)
+    ActionCable.server.broadcast 'roster_notifications_channel', update: true
     redirect_to roster_url
   end
-
-
 
   def getCurrentUserId
     render json: current_user.id
@@ -33,9 +33,6 @@ class MemberController < ApplicationController
 
   def getNextTask
     render json: Task.where(state: :queued).order(:created_at).limit(1) if current_user.tech.eql?(true)
-  end
-
-  def closeTask
   end
 
   def rosterFeed

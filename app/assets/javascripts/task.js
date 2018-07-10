@@ -1,5 +1,6 @@
 //= require nextTask
-//=require cable
+//= require cable
+//= require ./channels/dialog_notifications
 
 // scroll dialog messages to the bottom on DOM Ready
 function scrollFix() {

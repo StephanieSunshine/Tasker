@@ -40,6 +40,7 @@ class TaskController < ApplicationController
     params.require(:id)
     task = Task.find(params[:id])
     task.update({state: :completed}) if (task.user_id.eql?(current_user.id) || current_user.tech) && task.state.eql?("active")
+    ActionCable.server.broadcast 'roster_notifications_channel', update: true
     redirect_to roster_url
   end
 
@@ -47,6 +48,7 @@ class TaskController < ApplicationController
     params.require(:id)
     task = Task.find(params[:id])
     task.update({assigned_to: current_user.id, state: :active}) if(current_user.tech && task.state.eql?("queued"))
+    ActionCable.server.broadcast 'roster_notifications_channel', update: true
     redirect_to '/task/'+params[:id]
   end
 

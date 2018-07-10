@@ -1,4 +1,7 @@
 //= require nextTask
+//= require cable
+//= require ./channels/roster_notifications
+
 // Load json list via ajax from the server to task details
 var cookies = new Object;
 
@@ -55,10 +58,11 @@ function editDetails(task) {
 
 // Load json list via ajax from the server to populate tasks
 function loadFeeder() {
+  console.log('loadFeeder triggered');
   $.ajax({
     url: '/roster/feed'
-  }).done(function(data) {
-    $('#task-list').replaceWith(data.map(function(data) {
+  }).done(function(d) {
+    var r = d.map(function(data) {
       var result = [];
       if(data.state=="completed") {
         result.push("<tr class='table-success' onClick=\"editDetails(this)\" data-id=\""+data.id+"\">");
@@ -74,7 +78,8 @@ function loadFeeder() {
       result.push("<td>"+data.last_update+"</td>");
       result.push("<td>"+data.age+"</td>");
       return(result.join());
-    }).join("\n"));
+    }).join("\n");
+    $('#task-list').html(r);
   });
 }
 
