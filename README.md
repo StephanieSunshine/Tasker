@@ -1,16 +1,12 @@
 # Tasker
+
+## Example
+Demo Tasker at: https://sunshine-tasker-demo.herokuapp.com/
+
 ## Requirements
 - Ruby
 - Postgresql
 - Redis
-
-## Recomendations
-
-### Postgresql
-Postgres needs a DATABASE_URL envrionmental variable set when doing development.  Don't forget to create the database before starting the application.
-
-### Redis
-Redis needs either a REDIS_URL environmental variable or a Redis server running on localhost with the default port.
 
 ## Quickstart
 ```bash
@@ -20,11 +16,16 @@ DATABASE_URL="postgres://postgres:postgres@localhost/tasker" bin/rails db:migrat
 DATABASE_URL="postgres://postgres:postgres@localhost/tasker" bin/rails s
 ```
 
-## Production
-If one were to use this in production I would suggest using Heroku as your provider
+## Recomendations
 
-## Example
-Demo Tasker at: https://sunshine-tasker-demo.herokuapp.com/
+### Postgresql
+Postgres needs a DATABASE_URL envrionmental variable set when doing development.  Don't forget to create the database before starting the application.
+
+### Redis
+Redis needs either a REDIS_URL environmental variable or a Redis server running on localhost with the default port.
+
+### Production
+If one were to use this in production I would suggest using Heroku as your provider.  Make sure you set DEVISE_SECRET_KEY in production to something persistent
 
 ## License
 MIT License
@@ -48,4 +49,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
