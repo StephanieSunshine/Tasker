@@ -12,11 +12,11 @@ class TaskController < ApplicationController
     @response['last_update']=distance_of_time_in_words(Time.now, @response['updated_at'])+' ago'
     @response['age']=distance_of_time_in_words(Time.now, @response['created_at'])+' ago'
     case @response['state']
-    when :queued
+    when "queued"
       @response['state_color'] = "table-warning"
-    when :active
+    when "active"
       @response['state_color'] = "table-info"
-    when :completed
+    when "completed"
       @response['state_color'] = "table-success"
     end
     @response['age_color'] = "table-success"
